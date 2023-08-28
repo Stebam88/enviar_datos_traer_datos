@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test 5</title>
+    <script>
+        function enviar_server() {//en esta funcion, enviamos con un fetch al json server todos los elementos que contengan "contentEditable"
+            //en formato json.
+            // guardar en la variable elementosEditable todos los elementos con la propiedad contentEditable
+            var elementosEditable = document.querySelectorAll('[contentEditable]');
+
+            // Crear un objeto para almacenar los valores de los elementos
+            var valores = {};
+
+            // Recorrer todos los elementos y guardar su contenido en el objeto
+            for (var i = 0; i < elementosEditable.length; i++) {
+                var elemento = elementosEditable[i];
+                //usamos el trim
+                var clave = elemento.id.trim();//es la key de json o del objeto
+                var valor = elemento.innerHTML.trim();//es el resultado o valor de la key del objeto
+                valores[clave] = valor;
+            }
+            // Convertir el objeto a JSON
+            var mi_json_ej = JSON.stringify(valores);
+
+            // Guardar el JSON en una variable, enviarlo al servidor, etc.
+            console.log(mi_json_ej);//esta es la variable donde guardo el objeto con todos los valores que quiera y lo convierto a formato json
+            
+            fetch('http://localhost:3000/datos_ejemplo/6', {//en este fetch, con el metodo put, voy a editar el 6
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: mi_json_ej,
+            });
+        }
+        function traer_server() {
+            var elementosEditable = document.querySelectorAll('[contentEditable]');
+
+            var machaca1 = document.getElementsByClassName('imgfirma'); //creo 37 variables(todas las que hay en el listado de variables)
+                                                                        //y las asocio a cualquier clase que tenga lo de entre comillas en mi form
+            var machaca2 = document.getElementsByClassName('comercial_name');
+            var machaca3 = document.getElementsByClassName('vat');
+            var machaca4 = document.getElementsByClassName('legal_address');
+            var machaca5 = document.getElementsByClassName('legal_city');
+            var machaca6 = document.getElementsByClassName('legal_country');
+            var machaca7 = document.getElementsByClassName('legal_state');
+            var machaca8 = document.getElementsByClassName('notification_address');
+            var machaca9 = document.getElementsByClassName('notification_city');
+            var machaca10 = document.getElementsByClassName('notification_state');
+            var machaca11 = document.getElementsByClassName('notification_country');
+            var machaca12 = document.getElementsByClassName('notification_zip_code');
+            var machaca13 = document.getElementsByClassName('representative_name');
+            var machaca14 = document.getElementsByClassName('identity_num');
+            var machaca15 = document.getElementsByClassName('job_position');
+            var machaca16 = document.getElementsByClassName('iban');
+            var machaca17 = document.getElementsByClassName('swift');
+            var machaca18 = document.getElementsByClassName('industry');
+            var machaca19 = document.getElementsByClassName('manufacturer');
+            var machaca20 = document.getElementsByClassName('nato_holder');
+            var machaca21 = document.getElementsByClassName('nato_certificate_level');
+            var machaca22 = document.getElementsByClassName('services_summary');
+            var machaca23 = document.getElementsByClassName('key_customers');
+            var machaca24 = document.getElementsByClassName('main_projects');
+            var machaca25 = document.getElementsByClassName('main_contact_name');
+            var machaca26 = document.getElementsByClassName('main_contact_position');
+            var machaca27 = document.getElementsByClassName('main_contact_prefix');
+            var machaca28 = document.getElementsByClassName('main_contact_phone');
+            var machaca29 = document.getElementsByClassName('main_contact_email');
+            var machaca30 = document.getElementsByClassName('sales_contact_name');
+            var machaca31 = document.getElementsByClassName('sales_contact_position');
+            var machaca32 = document.getElementsByClassName('sales_contact_prefix');
+            var machaca33 = document.getElementsByClassName('sales_contact_phone');
+            var machaca34 = document.getElementsByClassName('sales_contact_email');
+            var machaca35 = document.getElementsByClassName('technical_contact_name');
+            var machaca36 = document.getElementsByClassName('company_name');
+            var machaca37 = document.getElementsByClassName('legal_zip_code');
+
+            fetch('http://localhost:3000/datos_ejemplo/6')  //hago fetch de get (si no lo especifico lo hace automaticamente) al modulo que yo quiera
+                                                            //en este caso es el modulo 6, por ejemplo ya que tengo unas cuantas variables ahi
+                .then(function (respuesta_server) {
+                    return respuesta_server.json();
+                })
+                .then(function (datos) {//me devuelve en la variable datos todo el contenido del modulo json en concreto
+                    for (let i = 0; i < machaca1.length; i++) {//ahora, para cada variable que he declarado, la recorro (si no existe en mi form, el tamaño de la variable es 0, por tanto no realiza ninguna iteracion en el for)
+                        machaca1[i].innerHTML = datos.imgfirma;//lo que hago es sustituir el valor inerHTML que tenga esa clase por el valor que tenga dentro del json al que le hago FETCH concretamente
+                    }
+                    for (let i = 0; i < machaca2.length; i++) {
+                        machaca2[i].innerHTML = datos.comercial_name;
+                    }
+                    for (let i = 0; i < machaca3.length; i++) {
+                        machaca3[i].innerHTML = datos.vat;
+                    }
+                    for (let i = 0; i < machaca4.length; i++) {
+                        machaca4[i].innerHTML = datos.legal_address;
+                    }
+                    for (let i = 0; i < machaca5.length; i++) {
+                        machaca5[i].innerHTML = datos.legal_city;
+                    }
+                    for (let i = 0; i < machaca6.length; i++) {
+                        machaca6[i].innerHTML = datos.legal_country;
+                    }
+                    for (let i = 0; i < machaca7.length; i++) {
+                        machaca7[i].innerHTML = datos.legal_state;
+                    }
+                    for (let i = 0; i < machaca8.length; i++) {
+                        machaca8[i].innerHTML = datos.notification_address;
+                    }
+                    for (let i = 0; i < machaca9.length; i++) {
+                        machaca9[i].innerHTML = datos.notification_city;
+                    }
+                    for (let i = 0; i < machaca10.length; i++) {
+                        machaca10[i].innerHTML = datos.notification_state;
+                    }
+                    for (let i = 0; i < machaca11.length; i++) {
+                        machaca11[i].innerHTML = datos.notification_country;
+                    }
+                    for (let i = 0; i < machaca12.length; i++) {
+                        machaca12[i].innerHTML = datos.notification_zip_code;
+                    }
+                    for (let i = 0; i < machaca13.length; i++) {
+                        machaca13[i].innerHTML = datos.representative_name;
+                    }
+                    for (let i = 0; i < machaca14.length; i++) {
+                        machaca14[i].innerHTML = datos.identity_num;
+                    }
+                    for (let i = 0; i < machaca15.length; i++) {
+                        machaca15[i].innerHTML = datos.job_position;
+                    }
+                    for (let i = 0; i < machaca16.length; i++) {
+                        machaca16[i].innerHTML = datos.iban;
+                    }
+                    for (let i = 0; i < machaca17.length; i++) {
+                        machaca17[i].innerHTML = datos.swift;
+                    }
+                    for (let i = 0; i < machaca18.length; i++) {
+                        machaca18[i].innerHTML = datos.industry;
+                    }
+                    for (let i = 0; i < machaca19.length; i++) {
+                        machaca19[i].innerHTML = datos.manufacturer;
+                    }
+                    for (let i = 0; i < machaca20.length; i++) {
+                        machaca20[i].innerHTML = datos.nato_holder;
+                    }
+                    for (let i = 0; i < machaca21.length; i++) {
+                        machaca21[i].innerHTML = datos.nato_certificate_level;
+                    }
+                    for (let i = 0; i < machaca22.length; i++) {
+                        machaca22[i].innerHTML = datos.services_summary;
+                    }
+                    for (let i = 0; i < machaca23.length; i++) {
+                        machaca23[i].innerHTML = datos.key_customers;
+                    }
+                    for (let i = 0; i < machaca24.length; i++) {
+                        machaca24[i].innerHTML = datos.main_projects;
+                    }
+                    for (let i = 0; i < machaca25.length; i++) {
+                        machaca25[i].innerHTML = datos.main_contact_name;
+                    }
+                    for (let i = 0; i < machaca26.length; i++) {
+                        machaca26[i].innerHTML = datos.main_contact_position;
+                    }
+                    for (let i = 0; i < machaca27.length; i++) {
+                        machaca27[i].innerHTML = datos.main_contact_prefix;
+                    }
+                    for (let i = 0; i < machaca28.length; i++) {
+                        machaca28[i].innerHTML = datos.main_contact_phone;
+                    }
+                    for (let i = 0; i < machaca29.length; i++) {
+                        machaca29[i].innerHTML = datos.main_contact_email;
+                    }
+                    for (let i = 0; i < machaca30.length; i++) {
+                        machaca30[i].innerHTML = datos.sales_contact_name;
+                    }
+                    for (let i = 0; i < machaca31.length; i++) {
+                        machaca31[i].innerHTML = datos.sales_contact_position;
+                    }
+                    for (let i = 0; i < machaca32.length; i++) {
+                        machaca32[i].innerHTML = datos.sales_contact_prefix;
+                    }
+                    for (let i = 0; i < machaca33.length; i++) {
+                        machaca33[i].innerHTML = datos.sales_contact_phone;
+                    }
+                    for (let i = 0; i < machaca34.length; i++) {
+                        machaca34[i].innerHTML = datos.sales_contact_email;
+                    }
+                    for (let i = 0; i < machaca35.length; i++) {
+                        machaca35[i].innerHTML = datos.technical_contact_name;
+                    }
+                    for (let i = 0; i < machaca36.length; i++) {
+                        machaca36[i].innerHTML = datos.company_name;
+                    }
+                    for (let i = 0; i < machaca37.length; i++) {
+                        machaca37[i].innerHTML = datos.legal_zip_code;
+                    }
+
+                });
+            document.documentElement.innerHTML = document.documentElement.innerHTML;
+            console.log("traigo todo del json-server");
+        }
+        function test() {
+            console.log("NO HAGO NADA AHORA");
+        }
+    </script>
+</head>
+
+<body>
+    <div id="d1">
+        <span id="vat" class="bg-warning vat" contentEditable>ewqe</span>
+        <span id="company_name" class="bg-warning company_name" contentEditable>2</span>
+        <span id="legal_address" class="bg-warning legal_address" contentEditable>2</span>
+        <span id="comercial_name" class="bg-warning comercial_name" contentEditable>2</span>
+        <span id="comercial_name" class="bg-warning comercial_name" contentEditable>2</span>
+        <span id="comercial_name" class="bg-warning comercial_name" contentEditable>2</span>
+        <span id="identity_num" class="bg-warning identity_num" contentEditable>3</span>
+        <div>
+            <span id="legal_zip_code" class="bg-warning legal_zip_code" contentEditable>ewqe</span>
+            <span id="legal_city" class="bg-warning legal_city" contentEditable>5</span>
+            <span id="legal_zip_code" class="bg-warning legal_zip_code" contentEditable>6</span>
+            <span id="comercial_name" class="bg-warning comercial_name" contentEditable>2</span>
+        </div>
+        <div>
+            <span id="comercial_name" class="bg-warning comercial_name" contentEditable>2</span>
+            <span id="comercial_name" class="bg-warning comercial_name" contentEditable>2</span>
+            <span id="legal_country" class="bg-warning vat legal_country" contentEditable>ghfhfgghf</span>
+            <span id="legal_state" class="bg-warning legal_state" contentEditable>jhgj</span>
+            <span id="identity_num" class="bg-warning identity_num" contentEditable>9</span>
+            <span id="administration_contact_name" class="bg-warning administration_contact_name" contentEditable>aquiii</span>
+             
+        </div>
+    </div>
+    <div id="boton2">
+        <button onclick="enviar_server()">Enviar_al_server</button>
+    </div>
+    <div id="boton3">
+        <button onclick="traer_server()">Traer_del_server</button>
+    </div>
+    <div id="boton4">
+        <button onclick="test()">TEst</button>
+    </div>
+</body>
+
+</html>
